@@ -1,0 +1,8 @@
+version: "1"
+intake_manifest: ../../data/manifests/abcd-intake-v1.json
+workflow: ../workflows/retail_support.yaml
+mapping: ../mappings/abcd_retail_v1.yaml
+seed: 42
+calibration_fraction: 0.15
+output_directory: ../../data/processed/abcd-partitions-v1
+manifest: ../../data/manifests/abcd-partitions-v1.json

@@ -1,0 +1,8 @@
+checkpoint: convaiinnovations/laya
+revision: 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851
+local_path: ../../artifacts/models/laya-english-55cf4c4e
+device: cpu
+batch_size: 4
+cpu_threads: 4
+max_len: 512
+head_max_len: 192

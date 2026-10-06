@@ -1,0 +1,10 @@
+version: "1"
+workflow_id: retail_support
+workflow_version: "1"
+phrases:
+  account: [password, log in, sign in, username, two factor, account locked]
+  orders_delivery: [delivery, tracking, shipment, shipping, cancel my order, change my order, order status]
+  returns_refunds: [refund, return an item, return my, wrong size, wrong color]
+  billing_subscriptions: [charged, charge, bill, subscription, payment dispute, promo code]
+  product_policy: [opening hours, store hours, in stock, out of stock, price match, policy, product information]
+  technical_support: [website, checkout, shopping cart, error message, page won't load, site is slow]

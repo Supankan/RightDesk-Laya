@@ -1,0 +1,28 @@
+# Validated workflow configuration; queue definitions remain subject to dataset review.
+workflow_id: retail_support
+version: "1"
+execution_mode: shadow
+queues:
+  - id: account
+    description: Account access, profile details, and account management.
+  - id: orders_delivery
+    description: Order changes, shipment tracking, and delivery problems.
+  - id: returns_refunds
+    description: Product returns, refund requests, and refund status.
+  - id: billing_subscriptions
+    description: Unexpected charges, payment disputes, and subscription billing.
+  - id: product_policy
+    description: Product questions, store information, and policy questions.
+  - id: technical_support
+    description: Website and checkout technical problems.
+questions:
+  - id: charge_or_refund
+    text: Was this a new charge, or are you waiting for the original payment to be refunded?
+    dimension: payment_issue_type
+policy:
+  version: "1"
+  max_questions: 1
+  routing_threshold: null
+  sufficient_information_threshold: null
+  calibration_version: null
+  clarification_enabled: false

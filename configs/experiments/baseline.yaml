@@ -1,0 +1,31 @@
+# Dataset prepared in Phase 3. Model execution and calibration remain future work.
+experiment_id: retail_baseline
+seed: 42
+workflow: ../workflows/retail_support.yaml
+dataset:
+  source: abcd
+  manifest: ../../data/manifests/abcd-partitions-v1.json
+  processed_path: ../../data/processed/abcd-partitions-v1
+  queue_mapping_version: "1"
+split_roles:
+  - train
+  - development
+  - calibration
+  - test
+models:
+  - id: majority
+  - id: rules
+    rules_path: ../models/rules_v1.yaml
+  - id: tfidf_logistic
+  - id: laya
+    checkpoint: convaiinnovations/laya
+    revision: 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851
+metrics:
+  - routing_error
+  - automation_coverage
+  - macro_f1
+  - brier_score
+  - calibration_error
+  - latency_p50_ms
+  - latency_p95_ms
+output_directory: ../../artifacts

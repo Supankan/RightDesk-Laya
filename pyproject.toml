@@ -1,0 +1,42 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "rightdesk"
+version = "0.1.0"
+description = "A local workbench for evaluating selective support intake."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic>=2,<3",
+    "pyyaml>=6,<7",
+    "typer>=0.12,<1",
+]
+
+[project.optional-dependencies]
+data = ["numpy", "pandas", "pyarrow"]
+baseline = ["numpy", "scikit-learn"]
+ml = ["laya[structured]", "scikit-learn"]
+ui = ["streamlit", "plotly"]
+
+[dependency-groups]
+dev = ["pytest", "ruff"]
+
+[project.scripts]
+rightdesk = "rightdesk.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/rightdesk"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+extend-exclude = [".bootstrap", ".uv-cache"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

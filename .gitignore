@@ -1,0 +1,36 @@
+# Local environments and generated Python files
+.venv/
+.bootstrap/
+.uv-cache/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local secrets and editor state
+.env
+.env.*
+!.env.example
+.idea/
+.vscode/
+.streamlit/secrets.toml
+
+# Source data and experiment outputs stay local.
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/manifests/*
+!data/manifests/.gitkeep
+artifacts/*
+!artifacts/.gitkeep
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
