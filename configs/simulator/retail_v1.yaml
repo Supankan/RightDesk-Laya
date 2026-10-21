@@ -1,0 +1,9 @@
+version: primary_helpdesk_v1
+workflow: ../workflows/retail_simulation.yaml
+incumbent: incumbent_v1.yaml
+clarification: ../clarification/retail_v2.yaml
+seed: 42
+start_at: "2026-01-01T00:00:00+00:00"
+arrival_gap_seconds: 10
+customer_timeout_seconds: 120
+service_seconds: 45

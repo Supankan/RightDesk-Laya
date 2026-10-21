@@ -1,0 +1,8 @@
+version: retail_calibration_v1
+seed: 42
+fit_fraction: 0.5
+selection_fraction: 0.25
+target_error: 0.05
+min_routed_groups: 30
+family_alpha: 0.05
+bootstrap_samples: 500

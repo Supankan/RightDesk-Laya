@@ -1,0 +1,20 @@
+version: incumbent_phrase_rules_v1
+workflow_id: retail_support
+workflow_version: "2"
+phrases:
+  account: [password, login, sign in, account locked, username]
+  orders_delivery: [shipment, tracking, delivery, parcel, order status]
+  returns_refunds: [refund, return, damaged item, send it back]
+  billing_subscriptions: [charge, charged, subscription, invoice, billing]
+  product_policy: [opening hours, store policy, product information, warranty]
+  technical_support: [checkout, website error, payment page, app crashes]
+answer_phrases:
+  charge_or_refund:
+    billing_subscriptions: [new charge, duplicate charge, charged twice, new payment]
+    returns_refunds: [waiting for refund, refund pending, original payment, waiting on refund]
+  delivery_or_return:
+    orders_delivery: [not arrived, lost parcel, track my shipment, receiving the order]
+    returns_refunds: [return, refund, send it back, already received]
+  account_or_checkout:
+    account: [login, password, sign in, signing in]
+    technical_support: [checkout, website error, payment page]

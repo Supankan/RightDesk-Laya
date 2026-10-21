@@ -1,0 +1,13 @@
+version: bounded_questions_v2
+workflow_id: retail_support
+workflow_version: "2"
+min_pair_mass: 0.65
+max_probability: 0.85
+max_margin: 0.2
+rules:
+  - question_id: charge_or_refund
+    candidate_queues: [billing_subscriptions, returns_refunds]
+  - question_id: delivery_or_return
+    candidate_queues: [orders_delivery, returns_refunds]
+  - question_id: account_or_checkout
+    candidate_queues: [account, technical_support]

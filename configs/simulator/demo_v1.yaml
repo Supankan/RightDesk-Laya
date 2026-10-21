@@ -1,0 +1,79 @@
+version: synthetic_lifecycle_v1
+kind: synthetic
+cases:
+  - case_id: demo-account
+    text: Please reset my password.
+    expected_status: resolved
+    expected_queue: account
+  - case_id: demo-delivery
+    text: Can I get shipment tracking?
+    expected_status: resolved
+    expected_queue: orders_delivery
+  - case_id: demo-refund
+    text: I have a charge and refund issue.
+    replies: [{after_seconds: 15, text: I am waiting for refund of the original payment.}]
+    expected_question: charge_or_refund
+    expected_status: resolved
+    expected_queue: returns_refunds
+  - case_id: demo-charge
+    text: I have a charge and refund issue.
+    replies: [{after_seconds: 20, text: This is a duplicate charge.}]
+    expected_question: charge_or_refund
+    expected_status: resolved
+    expected_queue: billing_subscriptions
+  - case_id: demo-no-response
+    text: I have a charge and refund issue.
+    expected_question: charge_or_refund
+    expected_status: awaiting_agent
+  - case_id: demo-order-stage
+    text: I have a delivery and return problem.
+    replies: [{after_seconds: 15, text: The order has not arrived.}]
+    expected_question: delivery_or_return
+    expected_status: resolved
+    expected_queue: orders_delivery
+  - case_id: demo-site-stage
+    text: I have a login and checkout problem.
+    replies: [{after_seconds: 15, text: The checkout page is broken.}]
+    expected_question: account_or_checkout
+    expected_status: resolved
+    expected_queue: technical_support
+  - case_id: demo-agent-lifecycle
+    text: Hello, I need help.
+    agent_actions:
+      - {after_seconds: 5, action: assign, queue: product_policy}
+      - {after_seconds: 10, action: reassign, queue: account}
+      - {after_seconds: 15, action: resolve}
+      - {after_seconds: 20, action: reopen}
+      - {after_seconds: 25, action: assign, queue: orders_delivery}
+    expected_status: resolved
+    expected_queue: orders_delivery
+  - case_id: demo-unhelpful-reply
+    text: I have a charge and refund issue.
+    replies: [{after_seconds: 10, text: I do not know.}]
+    agent_actions: [{after_seconds: 15, action: assign, queue: billing_subscriptions}]
+    expected_question: charge_or_refund
+    expected_status: resolved
+    expected_queue: billing_subscriptions
+  - case_id: demo-unsupported
+    text: Je demande un refund.
+    language: fr
+    expected_status: awaiting_agent
+  - case_id: demo-late-reply
+    text: I have a charge and refund issue.
+    replies: [{after_seconds: 125, text: I am waiting for refund.}]
+    agent_actions: [{after_seconds: 130, action: assign, queue: returns_refunds}]
+    expected_question: charge_or_refund
+    expected_status: resolved
+    expected_queue: returns_refunds
+  - case_id: demo-product
+    text: Please explain the warranty.
+    expected_status: resolved
+    expected_queue: product_policy
+  - case_id: demo-multi-ambiguity
+    text: I have a login and checkout and refund problem.
+    expected_status: awaiting_agent
+  - case_id: demo-conflicting-answer
+    text: I have a charge and refund issue.
+    replies: [{after_seconds: 10, text: A new charge and a refund pending.}]
+    expected_question: charge_or_refund
+    expected_status: awaiting_agent

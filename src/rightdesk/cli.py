@@ -1,4 +1,4 @@
-"""Configuration checks and dataset preparation; experiment execution comes later."""
+"""Configuration, reproducible experiments, catalog operations, and human review."""
 
 from pathlib import Path
 from typing import Annotated
@@ -13,10 +13,19 @@ from rightdesk.config import (
 )
 from rightdesk.data.importers.abcd import REVISION, IngestionError, download_abcd, import_abcd
 from rightdesk.data.splits import prepare_partitions
+from rightdesk.shadow.cli import final_app, shadow_app
+from rightdesk.simulation.cli import clarification_app, sim_app
+from rightdesk.workbench_cli import review_app, store_app
 
 app = typer.Typer(no_args_is_help=True)
 data_app = typer.Typer(no_args_is_help=True, help="Download and prepare research datasets.")
 app.add_typer(data_app, name="data")
+app.add_typer(store_app, name="store")
+app.add_typer(review_app, name="review")
+app.add_typer(clarification_app, name="clarification")
+app.add_typer(sim_app, name="simulate")
+app.add_typer(shadow_app, name="shadow")
+app.add_typer(final_app, name="final-evaluation")
 
 
 @data_app.command("download-abcd")
@@ -101,6 +110,44 @@ def benchmark_baselines_command(
         raise typer.Exit(code=1) from exc
     except (ValueError, OSError, KeyError, TypeError) as exc:
         typer.echo(f"Baseline benchmark failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+
+
+@app.command("predict-calibration")
+def predict_calibration_command(
+    config: Path = Path("configs/experiments/baseline.yaml"),
+    adapter: Path = Path("configs/models/laya_v1.yaml"),
+    source: Path = Path("artifacts/laya-development-v1"),
+    output: Path = Path("artifacts/calibration-predictions-v1"),
+) -> None:
+    """Capture reserved-calibration predictions using frozen development models."""
+    try:
+        from rightdesk.evaluation.calibration_predictions import capture_calibration
+
+        result = capture_calibration(config, adapter, source, output, typer.echo)
+        typer.echo(f"Calibration prediction manifest: {result}")
+    except (ImportError, ValueError, OSError, RuntimeError, KeyError) as exc:
+        typer.echo(f"Calibration prediction capture failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+
+
+@app.command("calibrate-routing")
+def calibrate_routing_command(
+    config: Path = Path("configs/experiments/baseline.yaml"),
+    adapter: Path = Path("configs/models/laya_v1.yaml"),
+    calibration: Path = Path("configs/calibration/retail_v1.yaml"),
+    source: Path = Path("artifacts/laya-development-v1"),
+    predictions: Path = Path("artifacts/calibration-predictions-v1"),
+    output: Path = Path("artifacts/calibration-v1"),
+) -> None:
+    """Fit temperatures, select thresholds, and validate frozen shadow policies."""
+    try:
+        from rightdesk.evaluation.calibration_run import calibrate_routing
+
+        result = calibrate_routing(config, adapter, calibration, source, predictions, output)
+        typer.echo(f"Calibration and policy report: {result}")
+    except (ImportError, ValueError, OSError, RuntimeError, KeyError) as exc:
+        typer.echo(f"Calibration failed: {exc}", err=True)
         raise typer.Exit(code=1) from exc
 
 

@@ -104,15 +104,42 @@ to the containing YAML. The CLI's `--experiment` check also loads the linked
 workflow. Dataset paths, queue mapping, and Laya revision remain nullable in
 the experiment template; passing validation does not mean it can be executed.
 
-`policy.version` is required. Both thresholds and calibration_version remain
-null until calibration work. No default threshold or confidence is invented.
+`policy.version` is required. The original workflow keeps both thresholds and
+calibration_version null. Phase 7 saves separate workflow snapshots with selected
+routing thresholds and calibration versions, plus `RoutingSettings` binding the
+model revision and validation gate. Sufficiency remains null and clarification
+disabled. See [calibration and routing](calibration-routing.md).
 
 ## Laya decision fields
 
-The bounded questions are `owner_queue`, `sufficient_information`, and the
-experimental `clarification_question`. The adapter will retain distributions
-and metadata in ModelPrediction. Workflow policy owns the final action.
+The implemented Laya head is `owner_queue`. Its probabilities and revision are
+retained in `ModelPrediction`. Sufficiency and suggested-question model fields
+remain null; no trained sufficiency model exists. A separate application selector
+chooses predefined clarification questions from queue ambiguity. Workflow policy
+owns the proposed action.
 
 The queue definitions and first question template are in
 `configs/workflows/retail_support.yaml`. They require review against the dataset
 before any queue mapping or calibration is considered final.
+
+## Clarification and simulation additions
+
+`ClarificationConfig` binds question/queue pairs to a workflow version. The selector
+returns an explicit `QuestionChoice` eligibility trace; `IntakePolicy` produces
+the existing shadow `PolicyDecision` and preserves the separate routing gate.
+
+The primary simulator uses separate `IncumbentDecision`, `TicketState`,
+`CustomerMessage`, and `PublicEvent` contracts. Commands execute only in the local
+simulation, with expected ticket versions and idempotency keys. Persistent event
+versions and virtual times reconstruct the ticket projection exactly. Synthetic
+scenario expectations are driver inputs, not `ReviewedLabel` records or model inputs.
+See [clarification and simulation](clarification-simulator.md) for the full lifecycle.
+
+## Shadow persistence
+
+The independent observer stores immutable observed events and proposals, a durable
+event cursor, and prefix-projected customer/question history. Every proposal binds
+the triggering public event, model ID, exact `TicketInput` and hash, nullable
+`ModelPrediction`, shadow `PolicyDecision`, error details and timing. A transaction
+commits these records together with the next cursor. Primary state is never updated.
+See [shadow worker](shadow.md) for schema, isolation, recovery and workflow bridging.

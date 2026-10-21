@@ -1,0 +1,574 @@
+{
+  "schema_version": 1,
+  "status": "implementation complete; local research prototype",
+  "completed_at": "2026-10-21T06:07:54.039489+00:00",
+  "final_test_cases": 1004,
+  "reference": "provisional eventual owner, not reviewed intake sufficiency",
+  "dataset_manifest_sha256": "43e4e23d006390e7e849c26c26c281f7a162ba60f1711ee770d47d901a702da4",
+  "final_protocol_sha256": "ba65051dc7c0a1326ebb6379ab86ed3c89ec74c39b7db4367aa9c0cd9c07c62b",
+  "final_run_sha256": "efc7db1f9a5fbb2615173468e05e7cbbdac9ae86689fa6a2512a57887c837fa6",
+  "development_run_sha256": "81d4db78295d4a4ba6fdeaa16f2e10a49f2de99d0199342df19e5b8983acc954",
+  "calibration_run_sha256": "431e30350c270f69e4c047bef74550f731573164f9ca1ab48a98996bbfe1adf4",
+  "packages": {
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "laya": "0.3.21",
+    "torch": "2.14.0"
+  },
+  "base_models_refitted": false,
+  "thresholds_reselected": false,
+  "gate_changes": false,
+  "failed_cases": 0,
+  "metrics": {
+    "majority_raw": {
+      "cases": 1004,
+      "duplicate_groups": 879,
+      "accuracy": 0.250996015936255,
+      "accuracy_ci95": [
+        0.22212576556699623,
+        0.27833683901555156
+      ],
+      "macro_f1": 0.06687898089171974,
+      "operating_point": {
+        "auto_count": 1004,
+        "review_count": 0,
+        "automation_coverage": 1.0,
+        "error_count": 752,
+        "routing_error": 0.749003984063745,
+        "routing_error_ci95": [
+          0.7216631609844484,
+          0.7778742344330037
+        ],
+        "coverage_ci95": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid_replicates": 500
+      },
+      "brier_score": 0.8143092421339033,
+      "calibration_error": 0.014117562897580982,
+      "uncertainty": {
+        "method": "percentile cluster bootstrap of normalized-text groups",
+        "samples": 500,
+        "seed": 42,
+        "confidence_level": 0.95,
+        "limitations": "Descriptive pointwise intervals, not safety bounds. Zero errors can yield a degenerate interval; sparse routes and few groups are unreliable."
+      },
+      "frozen_candidate": {
+        "cases": 1004,
+        "auto_count": 0,
+        "review_count": 1004,
+        "automation_coverage": 0.0,
+        "error_count": 0,
+        "routing_error": null,
+        "routed_groups": 0,
+        "groups_with_any_error": 0,
+        "group_error_upper": null,
+        "group_bound_alpha": 0.05
+      },
+      "enabled_policy": {
+        "cases": 1004,
+        "auto_count": 0,
+        "review_count": 1004,
+        "automation_coverage": 0.0,
+        "error_count": 0,
+        "routing_error": null,
+        "routed_groups": 0,
+        "groups_with_any_error": 0,
+        "group_error_upper": null,
+        "group_bound_alpha": 0.05
+      },
+      "policy_enabled": false,
+      "model_revision": "majority-v1:ae003ce728472f098fd7630a4feadf59eb8adcf2b480851d60a7aac789bbf121",
+      "calibration_version": null
+    },
+    "majority_temperature": {
+      "cases": 1004,
+      "duplicate_groups": 879,
+      "accuracy": 0.250996015936255,
+      "accuracy_ci95": [
+        0.22212576556699623,
+        0.27833683901555156
+      ],
+      "macro_f1": 0.06687898089171974,
+      "operating_point": {
+        "auto_count": 1004,
+        "review_count": 0,
+        "automation_coverage": 1.0,
+        "error_count": 752,
+        "routing_error": 0.749003984063745,
+        "routing_error_ci95": [
+          0.7216631609844484,
+          0.7778742344330037
+        ],
+        "coverage_ci95": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid_replicates": 500
+      },
+      "brier_score": 0.8147350951464345,
+      "calibration_error": 0.021106132933040006,
+      "uncertainty": {
+        "method": "percentile cluster bootstrap of normalized-text groups",
+        "samples": 500,
+        "seed": 42,
+        "confidence_level": 0.95,
+        "limitations": "Descriptive pointwise intervals, not safety bounds. Zero errors can yield a degenerate interval; sparse routes and few groups are unreliable."
+      },
+      "frozen_candidate": {
+        "cases": 1004,
+        "auto_count": 0,
+        "review_count": 1004,
+        "automation_coverage": 0.0,
+        "error_count": 0,
+        "routing_error": null,
+        "routed_groups": 0,
+        "groups_with_any_error": 0,
+        "group_error_upper": null,
+        "group_bound_alpha": 0.05
+      },
+      "enabled_policy": {
+        "cases": 1004,
+        "auto_count": 0,
+        "review_count": 1004,
+        "automation_coverage": 0.0,
+        "error_count": 0,
+        "routing_error": null,
+        "routed_groups": 0,
+        "groups_with_any_error": 0,
+        "group_error_upper": null,
+        "group_bound_alpha": 0.05
+      },
+      "policy_enabled": false,
+      "model_revision": "majority-v1:ae003ce728472f098fd7630a4feadf59eb8adcf2b480851d60a7aac789bbf121",
+      "calibration_version": "retail_calibration_v1:majority"
+    },
+    "rules_native": {
+      "cases": 1004,
+      "duplicate_groups": 879,
+      "accuracy": 0.36254980079681276,
+      "accuracy_ci95": [
+        0.30186589892452653,
+        0.42355829601655576
+      ],
+      "macro_f1": 0.5095367569880075,
+      "operating_point": {
+        "auto_count": 409,
+        "review_count": 595,
+        "automation_coverage": 0.4073705179282869,
+        "error_count": 45,
+        "routing_error": 0.1100244498777506,
+        "routing_error_ci95": [
+          0.08063017292344074,
+          0.14268447837150125
+        ],
+        "coverage_ci95": [
+          0.34249974063699556,
+          0.47289775780830134
+        ],
+        "bootstrap_valid_replicates": 500
+      },
+      "brier_score": null,
+      "calibration_error": null,
+      "uncertainty": {
+        "method": "percentile cluster bootstrap of normalized-text groups",
+        "samples": 500,
+        "seed": 42,
+        "confidence_level": 0.95,
+        "limitations": "Descriptive pointwise intervals, not safety bounds. Zero errors can yield a degenerate interval; sparse routes and few groups are unreliable."
+      },
+      "frozen_candidate": {
+        "cases": 1004,
+        "auto_count": 409,
+        "review_count": 595,
+        "automation_coverage": 0.4073705179282869,
+        "error_count": 45,
+        "routing_error": 0.1100244498777506,
+        "routed_groups": 409,
+        "groups_with_any_error": 45,
+        "group_error_upper": 0.1388373555284734,
+        "group_bound_alpha": 0.05
+      },
+      "enabled_policy": {
+        "cases": 1004,
+        "auto_count": 0,
+        "review_count": 1004,
+        "automation_coverage": 0.0,
+        "error_count": 0,
+        "routing_error": null,
+        "routed_groups": 0,
+        "groups_with_any_error": 0,
+        "group_error_upper": null,
+        "group_bound_alpha": 0.05
+      },
+      "policy_enabled": false,
+      "model_revision": "rules-1:953294ff2099f21458bb8f2e69d758b7dcf940ba7d2e8389d42c3590dfbf5490",
+      "calibration_version": null
+    },
+    "tfidf_logistic_raw": {
+      "cases": 1004,
+      "duplicate_groups": 879,
+      "accuracy": 0.8147410358565738,
+      "accuracy_ci95": [
+        0.7281369074056758,
+        0.8972123182326622
+      ],
+      "macro_f1": 0.8250022412838821,
+      "operating_point": {
+        "auto_count": 1004,
+        "review_count": 0,
+        "automation_coverage": 1.0,
+        "error_count": 186,
+        "routing_error": 0.1852589641434263,
+        "routing_error_ci95": [
+          0.10278768176733781,
+          0.2718630925943241
+        ],
+        "coverage_ci95": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid_replicates": 500
+      },
+      "brier_score": 0.26758557850213055,
+      "calibration_error": 0.13577003818509012,
+      "uncertainty": {
+        "method": "percentile cluster bootstrap of normalized-text groups",
+        "samples": 500,
+        "seed": 42,
+        "confidence_level": 0.95,
+        "limitations": "Descriptive pointwise intervals, not safety bounds. Zero errors can yield a degenerate interval; sparse routes and few groups are unreliable."
+      },
+      "frozen_candidate": {
+        "cases": 1004,
+        "auto_count": 820,
+        "review_count": 184,
+        "automation_coverage": 0.8167330677290837,
+        "error_count": 48,
+        "routing_error": 0.05853658536585366,
+        "routed_groups": 818,
+        "groups_with_any_error": 48,
+        "group_error_upper": 0.07403713384707217,
+        "group_bound_alpha": 0.05
+      },
+      "enabled_policy": {
+        "cases": 1004,
+        "auto_count": 0,
+        "review_count": 1004,
+        "automation_coverage": 0.0,
+        "error_count": 0,
+        "routing_error": null,
+        "routed_groups": 0,
+        "groups_with_any_error": 0,
+        "group_error_upper": null,
+        "group_bound_alpha": 0.05
+      },
+      "policy_enabled": false,
+      "model_revision": "tfidf-logistic-v1:ae003ce728472f098fd7630a4feadf59eb8adcf2b480851d60a7aac789bbf121:seed-42",
+      "calibration_version": null
+    },
+    "tfidf_logistic_temperature": {
+      "cases": 1004,
+      "duplicate_groups": 879,
+      "accuracy": 0.8147410358565738,
+      "accuracy_ci95": [
+        0.7281369074056758,
+        0.8972123182326622
+      ],
+      "macro_f1": 0.8250022412838821,
+      "operating_point": {
+        "auto_count": 1004,
+        "review_count": 0,
+        "automation_coverage": 1.0,
+        "error_count": 186,
+        "routing_error": 0.1852589641434263,
+        "routing_error_ci95": [
+          0.10278768176733781,
+          0.2718630925943241
+        ],
+        "coverage_ci95": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid_replicates": 500
+      },
+      "brier_score": 0.23727238900040185,
+      "calibration_error": 0.041132908674032936,
+      "uncertainty": {
+        "method": "percentile cluster bootstrap of normalized-text groups",
+        "samples": 500,
+        "seed": 42,
+        "confidence_level": 0.95,
+        "limitations": "Descriptive pointwise intervals, not safety bounds. Zero errors can yield a degenerate interval; sparse routes and few groups are unreliable."
+      },
+      "frozen_candidate": {
+        "cases": 1004,
+        "auto_count": 875,
+        "review_count": 129,
+        "automation_coverage": 0.8715139442231076,
+        "error_count": 87,
+        "routing_error": 0.09942857142857142,
+        "routed_groups": 829,
+        "groups_with_any_error": 55,
+        "group_error_upper": 0.08235157807164852,
+        "group_bound_alpha": 0.05
+      },
+      "enabled_policy": {
+        "cases": 1004,
+        "auto_count": 0,
+        "review_count": 1004,
+        "automation_coverage": 0.0,
+        "error_count": 0,
+        "routing_error": null,
+        "routed_groups": 0,
+        "groups_with_any_error": 0,
+        "group_error_upper": null,
+        "group_bound_alpha": 0.05
+      },
+      "policy_enabled": false,
+      "model_revision": "tfidf-logistic-v1:ae003ce728472f098fd7630a4feadf59eb8adcf2b480851d60a7aac789bbf121:seed-42",
+      "calibration_version": "retail_calibration_v1:tfidf_logistic"
+    },
+    "laya_raw": {
+      "cases": 1004,
+      "duplicate_groups": 879,
+      "accuracy": 0.4701195219123506,
+      "accuracy_ci95": [
+        0.4077912544701767,
+        0.5340782122905028
+      ],
+      "macro_f1": 0.4660504850442549,
+      "operating_point": {
+        "auto_count": 1004,
+        "review_count": 0,
+        "automation_coverage": 1.0,
+        "error_count": 532,
+        "routing_error": 0.5298804780876494,
+        "routing_error_ci95": [
+          0.4659217877094972,
+          0.5922087455298233
+        ],
+        "coverage_ci95": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid_replicates": 500
+      },
+      "brier_score": 0.6759095048618841,
+      "calibration_error": 0.20240181308915262,
+      "uncertainty": {
+        "method": "percentile cluster bootstrap of normalized-text groups",
+        "samples": 500,
+        "seed": 42,
+        "confidence_level": 0.95,
+        "limitations": "Descriptive pointwise intervals, not safety bounds. Zero errors can yield a degenerate interval; sparse routes and few groups are unreliable."
+      },
+      "frozen_candidate": {
+        "cases": 1004,
+        "auto_count": 0,
+        "review_count": 1004,
+        "automation_coverage": 0.0,
+        "error_count": 0,
+        "routing_error": null,
+        "routed_groups": 0,
+        "groups_with_any_error": 0,
+        "group_error_upper": null,
+        "group_bound_alpha": 0.05
+      },
+      "enabled_policy": {
+        "cases": 1004,
+        "auto_count": 0,
+        "review_count": 1004,
+        "automation_coverage": 0.0,
+        "error_count": 0,
+        "routing_error": null,
+        "routed_groups": 0,
+        "groups_with_any_error": 0,
+        "group_error_upper": null,
+        "group_bound_alpha": 0.05
+      },
+      "policy_enabled": false,
+      "model_revision": "convaiinnovations/laya@55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "calibration_version": null
+    },
+    "laya_temperature": {
+      "cases": 1004,
+      "duplicate_groups": 879,
+      "accuracy": 0.4701195219123506,
+      "accuracy_ci95": [
+        0.4077912544701767,
+        0.5340782122905028
+      ],
+      "macro_f1": 0.4660504850442549,
+      "operating_point": {
+        "auto_count": 1004,
+        "review_count": 0,
+        "automation_coverage": 1.0,
+        "error_count": 532,
+        "routing_error": 0.5298804780876494,
+        "routing_error_ci95": [
+          0.4659217877094972,
+          0.5922087455298233
+        ],
+        "coverage_ci95": [
+          1.0,
+          1.0
+        ],
+        "bootstrap_valid_replicates": 500
+      },
+      "brier_score": 0.627693739932018,
+      "calibration_error": 0.1157137204860587,
+      "uncertainty": {
+        "method": "percentile cluster bootstrap of normalized-text groups",
+        "samples": 500,
+        "seed": 42,
+        "confidence_level": 0.95,
+        "limitations": "Descriptive pointwise intervals, not safety bounds. Zero errors can yield a degenerate interval; sparse routes and few groups are unreliable."
+      },
+      "frozen_candidate": {
+        "cases": 1004,
+        "auto_count": 0,
+        "review_count": 1004,
+        "automation_coverage": 0.0,
+        "error_count": 0,
+        "routing_error": null,
+        "routed_groups": 0,
+        "groups_with_any_error": 0,
+        "group_error_upper": null,
+        "group_bound_alpha": 0.05
+      },
+      "enabled_policy": {
+        "cases": 1004,
+        "auto_count": 0,
+        "review_count": 1004,
+        "automation_coverage": 0.0,
+        "error_count": 0,
+        "routing_error": null,
+        "routed_groups": 0,
+        "groups_with_any_error": 0,
+        "group_error_upper": null,
+        "group_bound_alpha": 0.05
+      },
+      "policy_enabled": false,
+      "model_revision": "convaiinnovations/laya@55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "calibration_version": "retail_calibration_v1:laya"
+    }
+  },
+  "end_to_end": {
+    "primary_unchanged": true,
+    "restart_idempotent": true,
+    "primary_verification": {
+      "simulation_id": "sim-7e863173bdbb4e1e8d55",
+      "events": 81,
+      "tickets": 14,
+      "last_event_id": 81,
+      "verified": true
+    },
+    "shadow_models": {
+      "laya": {
+        "proposals": 21,
+        "failures": 0,
+        "route": 0,
+        "clarify": 1,
+        "review": 20,
+        "paired": 20,
+        "action_agreements": 5,
+        "queue_pairs": 7,
+        "queue_agreements": 4
+      },
+      "majority": {
+        "proposals": 21,
+        "failures": 0,
+        "route": 0,
+        "clarify": 0,
+        "review": 21,
+        "paired": 20,
+        "action_agreements": 5,
+        "queue_pairs": 7,
+        "queue_agreements": 1
+      },
+      "rules": {
+        "proposals": 21,
+        "failures": 0,
+        "route": 0,
+        "clarify": 0,
+        "review": 21,
+        "paired": 20,
+        "action_agreements": 5,
+        "queue_pairs": 4,
+        "queue_agreements": 4
+      },
+      "tfidf_logistic": {
+        "proposals": 21,
+        "failures": 0,
+        "route": 0,
+        "clarify": 0,
+        "review": 21,
+        "paired": 20,
+        "action_agreements": 5,
+        "queue_pairs": 7,
+        "queue_agreements": 5
+      }
+    }
+  },
+  "development_shadow": {
+    "events": 172,
+    "cases": 50,
+    "models": {
+      "laya": {
+        "proposals": 50,
+        "failures": 0,
+        "route": 0,
+        "clarify": 2,
+        "review": 48,
+        "paired": 50,
+        "action_agreements": 26,
+        "queue_pairs": 22,
+        "queue_agreements": 20
+      },
+      "majority": {
+        "proposals": 50,
+        "failures": 0,
+        "route": 0,
+        "clarify": 0,
+        "review": 50,
+        "paired": 50,
+        "action_agreements": 28,
+        "queue_pairs": 22,
+        "queue_agreements": 0
+      },
+      "rules": {
+        "proposals": 50,
+        "failures": 0,
+        "route": 0,
+        "clarify": 0,
+        "review": 50,
+        "paired": 50,
+        "action_agreements": 28,
+        "queue_pairs": 19,
+        "queue_agreements": 18
+      },
+      "tfidf_logistic": {
+        "proposals": 50,
+        "failures": 0,
+        "route": 0,
+        "clarify": 1,
+        "review": 49,
+        "paired": 50,
+        "action_agreements": 27,
+        "queue_pairs": 22,
+        "queue_agreements": 20
+      }
+    }
+  },
+  "human_intake_annotations": 0,
+  "human_question_usefulness": null,
+  "limitations": [
+    "provisional eventual-owner targets",
+    "no validated automatic routing",
+    "no measured customer benefit",
+    "test consumed; no further tuning"
+  ]
+}

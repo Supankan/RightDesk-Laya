@@ -1,0 +1,9 @@
+version: bounded_questions_v1
+workflow_id: retail_support
+workflow_version: "1"
+min_pair_mass: 0.65
+max_probability: 0.85
+max_margin: 0.2
+rules:
+  - question_id: charge_or_refund
+    candidate_queues: [billing_subscriptions, returns_refunds]
